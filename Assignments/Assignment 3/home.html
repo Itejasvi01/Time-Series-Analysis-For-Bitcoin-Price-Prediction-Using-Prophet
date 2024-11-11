@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+        }
+        button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Task List</h1>
+    <a href="/create">Add New Task</a>
+    <ul>
+        {% for task in tasks %}
+        <li>
+            {{ task.description }} - 
+            Status: {{ 'Complete' if task.status == 1 else 'Incomplete' }}
+            <a href="/update/{{ task.id }}">Edit</a>
+            <form action="/delete/{{ task.id }}" method="post" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+        {% else %}
+        <li>No tasks available.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
